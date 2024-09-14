@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: linear-gradient(to bottom left, #8170f2, #b48df9);
+  --sliceGrad: linear-gradient(to bottom left, #4dd2ff, #2474ff);
+}
+
+body {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .rotatingAnimation {
+    animation: rotate 10s linear infinite;
+  }
+}
