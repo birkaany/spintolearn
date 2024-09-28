@@ -1,10 +1,9 @@
-import { Wheel } from "@/components/wheel/Wheel";
-import Image from "next/image";
+import { SpinWheel } from "./components/SpinWheel";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <Wheel />
-    </main>
+    <div className="h-screen flex items-center justify-center">
+      <SpinWheel />
+    </div>
   );
 }
