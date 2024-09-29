@@ -3,28 +3,28 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 
-export const SpinWheel = () => {
+export const SpinWheel = ({ sectors }: { sectors: any }) => {
   const wheelRef = useRef<HTMLCanvasElement>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isAccelerating, setIsAccelerating] = useState(false);
   const [winner, setWinner] = useState(0);
 
-  const sectors = [
-    { color: "#b0f", label: "100" },
-    { color: "#f0b", label: "5" },
-    { color: "#bf0", label: "500" },
-    { color: "#fb0", label: "10" },
-    { color: "#0b0", label: "1000" },
-    { color: "#0f0", label: "50" },
-  ];
+  // const sectors = [
+  //   { color: "#b0f", label: "100" },
+  //   { color: "#f0b", label: "5" },
+  //   { color: "#bf0", label: "500" },
+  //   { color: "#fb0", label: "10" },
+  //   { color: "#0b0", label: "1000" },
+  //   { color: "#0f0", label: "50" },
+  // ];
 
   const rand = (m: number, M: number) => Math.random() * (M - m) + m;
-  const tot = sectors.length;
-  const dia = 600;
+  const tot = sectors?.length;
+  const dia = 400;
   const rad = dia / 2;
   const PI = Math.PI;
   const TAU = 2 * PI;
-  const arc = TAU / sectors.length;
+  const arc = TAU / sectors?.length;
   const friction = 0.991;
   const angVelMin = 0.002;
 
@@ -94,13 +94,13 @@ export const SpinWheel = () => {
   };
 
   useEffect(() => {
-    const ctx = wheelRef.current?.getContext<CanvasRenderingContext2D>("2d");
+    const ctx = wheelRef.current?.getContext("2d");
     if (ctx) {
       ctx.canvas.width = dia;
       ctx.canvas.height = dia;
-      sectors.forEach((sector, i) => drawSector(ctx, sector, i));
+      sectors.forEach((sector: any, i: number) => drawSector(ctx, sector, i));
     }
-  }, []);
+  }, [sectors.length]);
 
   useEffect(() => {
     const intervalId = setInterval(frame, 1000 / 60);
