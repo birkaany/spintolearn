@@ -1,5 +1,6 @@
 "use client";
 
+import { COLORS } from "@/constants/colors";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,14 +10,32 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   const [isAccelerating, setIsAccelerating] = useState(false);
   const [winner, setWinner] = useState(0);
 
-  // const sectors = [
-  //   { color: "#b0f", label: "100" },
-  //   { color: "#f0b", label: "5" },
-  //   { color: "#bf0", label: "500" },
-  //   { color: "#fb0", label: "10" },
-  //   { color: "#0b0", label: "1000" },
-  //   { color: "#0f0", label: "50" },
-  // ];
+  const darkenColor = (color: string, amount: number) => {
+    let usePound = false;
+    if (color[0] === "#") {
+      color = color.slice(1);
+      usePound = true;
+    }
+
+    const num = parseInt(color, 16);
+    let r = (num >> 16) + amount;
+    let g = ((num >> 8) & 0x00ff) + amount;
+    let b = (num & 0x0000ff) + amount;
+
+    if (r > 255) r = 255;
+    else if (r < 0) r = 0;
+
+    if (g > 255) g = 255;
+    else if (g < 0) g = 0;
+
+    if (b > 255) b = 255;
+    else if (b < 0) b = 0;
+
+    return (
+      (usePound ? "#" : "") +
+      ((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")
+    );
+  };
 
   const rand = (m: number, M: number) => Math.random() * (M - m) + m;
   const tot = sectors?.length;
@@ -40,20 +59,27 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
     i: number
   ) => {
     const ang = arc * i;
+
     ctx.save();
     // COLOR
     ctx.beginPath();
-    ctx.fillStyle = sector.color;
+    ctx.fillStyle = COLORS[i % 5]?.bg || "#000";
     ctx.moveTo(rad, rad);
     ctx.arc(rad, rad, rad, ang, ang + arc);
     ctx.lineTo(rad, rad);
     ctx.fill();
+
+    // STROKE
+    ctx.strokeStyle = darkenColor(COLORS[i % 4]?.bg || "#000", -20);
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
     // TEXT
     ctx.translate(rad, rad);
     ctx.rotate(ang + arc / 2);
     ctx.textAlign = "right";
-    ctx.fillStyle = "#fff";
-    ctx.font = "bold 30px sans-serif";
+    ctx.fillStyle = COLORS[i % 4]?.text || "#fff";
+    ctx.font = "bold 1.25rem sans-serif ";
     ctx.fillText(sector.label, rad - 10, 10);
     ctx.restore();
   };
@@ -100,7 +126,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
       ctx.canvas.height = dia;
       sectors.forEach((sector: any, i: number) => drawSector(ctx, sector, i));
     }
-  }, [sectors.length]);
+  }, [sectors]);
 
   useEffect(() => {
     const intervalId = setInterval(frame, 1000 / 60);
@@ -119,28 +145,37 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   };
 
   return (
-    <div className="inline-flex relative overflow-hidden">
-      <canvas
-        className="block"
-        id="wheel"
-        width={dia}
-        height={dia}
-        ref={wheelRef}
-      ></canvas>
-      <div
-        style={{
-          backgroundColor: sectors[getIndex()].color,
-          borderColor: "#fff",
-          borderStyle: "solid",
-          borderWidth: "10px",
-          borderRadius: "50%",
-        }}
-        className={clsx(
-          'cursor-pointer flex justify-center items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[30%] h-[30%] bg-white text-black rounded-[50%] transition-[transform_0.5s] after:content-[""] after:absolute after:top-[-17px] after:border-[10px] after:border-[#fff] after:border-t-[0] after:border-b-[0] after:border-l-[10px] after:border-r-[10px] after:w-[20px] after:h-[20px] after:rotate-[-45deg]'
-        )}
-        onClick={handleSpin}
-      >
-        SPIN
+    <div className="rounded-full border-[8px] border-[#fefefc] drop-shadow-2xl shadow-2xl ">
+      <div className="inline-flex relative overflow-hidden border-[16px] border-[#001e38] rounded-full">
+        <div className="bg-transparent z-20 absolute top-0 left-0 w-full h-full border-[5px] blur-sm rounded-full border-black"></div>
+
+        <canvas
+          className="block"
+          id="wheel"
+          width={dia}
+          height={dia}
+          ref={wheelRef}
+        ></canvas>
+        <button
+          style={{
+            backgroundColor: COLORS[getIndex() % 4]?.bg || "#000",
+            color: COLORS[getIndex() % 4]?.text || "#fff",
+            borderColor: "#fff",
+            borderStyle: "solid",
+            borderWidth: "10px",
+            borderRadius: "50%",
+          }}
+          className={clsx(
+            'cursor-pointer z-50 flex justify-center font-bold items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-[20%] bg-white text-black rounded-[50%] transition-[transform_0.5s] after:content-[""] after:absolute after:top-[-14px] after:border-[10px] after:border-[#fff] after:border-t-[0] after:border-b-[0] after:border-l-[5px] after:border-r-[5px] after:w-[10px] after:h-[10px] after:rotate-[-45deg] uppercase tracking-wider text-xs',
+            {
+              "size-[10%] after:border-l-[5px] after:border-r-[5px] after:w-[10px] after:h-[10px] after:top-[-13px] transition-[transform_2s]":
+                isSpinning,
+            }
+          )}
+          onClick={handleSpin}
+        >
+          {isSpinning ? "" : "Spin"}
+        </button>
       </div>
     </div>
   );

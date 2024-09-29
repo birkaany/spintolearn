@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: linear-gradient(to bottom left, #8170f2, #b48df9);
+  --background: linear-gradient(to bottom, #f7f6f2, #eae9e5);
   --sliceGrad: linear-gradient(to bottom left, #4dd2ff, #2474ff);
 }
 

@@ -5,19 +5,21 @@ import { WordsList } from "./components/WordsList";
 
 export default function Home() {
   const [sectors, setSectors] = useState([
-    { color: "#b0f", label: "100" },
-    { color: "#f0b", label: "5" },
-    { color: "#bf0", label: "500" },
-    { color: "#fb0", label: "10" },
-    { color: "#0b0", label: "1000" },
-    { color: "#0f0", label: "50" },
+    { label: "apple" },
+    { label: "orange" },
+    { label: "orange" },
+    { label: "orange" },
   ]);
-  console.log(sectors);
+
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className="grid grid-cols-2">
-        <SpinWheel sectors={sectors} />
-        <WordsList sectors={sectors} setSectors={setSectors} />
+      <div className="grid grid-cols-[3fr_1fr] container w-full items-center justify-center ">
+        <div className="flex items-center justify-center">
+          <SpinWheel sectors={sectors} />
+        </div>
+        <div className="flex justify-center items-center">
+          <WordsList sectors={sectors} setSectors={setSectors} />
+        </div>
       </div>
     </div>
   );
