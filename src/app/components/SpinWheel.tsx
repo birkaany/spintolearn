@@ -63,7 +63,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
     ctx.save();
     // COLOR
     ctx.beginPath();
-    ctx.fillStyle = COLORS[i % 5]?.bg || "#000";
+    ctx.fillStyle = COLORS[i % 4]?.bg || "#000";
     ctx.moveTo(rad, rad);
     ctx.arc(rad, rad, rad, ang, ang + arc);
     ctx.lineTo(rad, rad);
@@ -95,12 +95,9 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
 
     if (angVel >= angVelMax) setIsAccelerating(false);
 
-    // Accelerate
     if (isAccelerating) {
       setAngVel((prev) => (prev || angVelMin) * 1.06);
-    }
-    // Decelerate
-    else {
+    } else {
       setAngVel((prev) => {
         const newAngVel = prev * friction;
         if (newAngVel < angVelMin) {
@@ -145,38 +142,42 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   };
 
   return (
-    <div className="rounded-full border-[8px] border-[#fefefc] drop-shadow-2xl shadow-2xl ">
-      <div className="inline-flex relative overflow-hidden border-[16px] border-[#001e38] rounded-full">
-        <div className="bg-transparent z-20 absolute top-0 left-0 w-full h-full border-[5px] blur-sm rounded-full border-black"></div>
+    <>
+      {sectors.length > 0 && (
+        <div className="rounded-full border-[8px] border-[#fefefc] drop-shadow-2xl shadow-2xl ">
+          <div className="inline-flex relative overflow-hidden border-[16px] border-[#001e38] rounded-full">
+            <div className="bg-transparent z-20 absolute top-0 left-0 w-full h-full border-[5px] blur-sm rounded-full border-black"></div>
 
-        <canvas
-          className="block"
-          id="wheel"
-          width={dia}
-          height={dia}
-          ref={wheelRef}
-        ></canvas>
-        <button
-          style={{
-            backgroundColor: COLORS[getIndex() % 4]?.bg || "#000",
-            color: COLORS[getIndex() % 4]?.text || "#fff",
-            borderColor: "#fff",
-            borderStyle: "solid",
-            borderWidth: "10px",
-            borderRadius: "50%",
-          }}
-          className={clsx(
-            'cursor-pointer z-50 flex justify-center font-bold items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-[20%] bg-white text-black rounded-[50%] transition-[transform_0.5s] after:content-[""] after:absolute after:top-[-14px] after:border-[10px] after:border-[#fff] after:border-t-[0] after:border-b-[0] after:border-l-[5px] after:border-r-[5px] after:w-[10px] after:h-[10px] after:rotate-[-45deg] uppercase tracking-wider text-xs',
-            {
-              "size-[10%] after:border-l-[5px] after:border-r-[5px] after:w-[10px] after:h-[10px] after:top-[-13px] transition-[transform_2s]":
-                isSpinning,
-            }
-          )}
-          onClick={handleSpin}
-        >
-          {isSpinning ? "" : "Spin"}
-        </button>
-      </div>
-    </div>
+            <canvas
+              className="block"
+              id="wheel"
+              width={dia}
+              height={dia}
+              ref={wheelRef}
+            ></canvas>
+            <button
+              style={{
+                backgroundColor: COLORS[getIndex() % 4]?.bg || "#000",
+                color: COLORS[getIndex() % 4]?.text || "#fff",
+                borderColor: "#fff",
+                borderStyle: "solid",
+                borderWidth: "10px",
+                borderRadius: "50%",
+              }}
+              className={clsx(
+                'cursor-pointer z-50 flex justify-center font-bold items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-[20%] bg-white text-black rounded-[50%] transition-[transform_0.5s] after:content-[""] after:absolute after:top-[-14px] after:border-[10px] after:border-[#fff] after:border-t-[0] after:border-b-[0] after:border-l-[5px] after:border-r-[5px] after:w-[10px] after:h-[10px] after:rotate-[-45deg] uppercase tracking-wider text-xs',
+                {
+                  "!size-[10%] after:border-l-[5px] after:border-r-[5px] after:w-[10px] after:h-[10px] after:top-[-13px] transition-[transform_2s]":
+                    isSpinning,
+                }
+              )}
+              onClick={handleSpin}
+            >
+              {!isSpinning && "Spin"}
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
