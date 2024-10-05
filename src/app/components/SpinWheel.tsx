@@ -14,7 +14,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   const [winnerModal, setWinnerModal] = useState(false);
   const [winnerWordData, setWinnerWordData] = useState<any>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
+  const [isDesktop, setIsDesktop] = useState(global.window.innerWidth > 1024);
 
   const darkenColor = (color: string, amount: number) => {
     let usePound = false;
