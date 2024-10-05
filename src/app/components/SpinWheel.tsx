@@ -14,6 +14,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   const [winnerModal, setWinnerModal] = useState(false);
   const [winnerWordData, setWinnerWordData] = useState<any>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
 
   const darkenColor = (color: string, amount: number) => {
     let usePound = false;
@@ -44,7 +45,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
 
   const rand = (m: number, M: number) => Math.random() * (M - m) + m;
   const tot = sectors?.length;
-  const dia = 400;
+  const dia = isDesktop ? 400 : 300;
   const rad = dia / 2;
   const PI = Math.PI;
   const TAU = 2 * PI;
