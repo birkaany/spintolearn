@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SpinWheel } from "./components/SpinWheel";
 import { WordsList } from "./components/WordsList";
 import { HiOutlinePencilAlt } from "react-icons/hi";
@@ -14,6 +14,7 @@ export default function Home() {
   ]);
 
   const [wordsModal, setWordsModal] = useState(false);
+
   return (
     <>
       <div className="h-screen flex items-center flex-col justify-center gap-4">
@@ -33,7 +34,12 @@ export default function Home() {
           />
         </div>
       </div>
-      <Modal open={wordsModal} setOpen={setWordsModal}>
+      <Modal
+        open={wordsModal}
+        setOpen={setWordsModal}
+        title="Set up your words"
+        subtitle="You can set up to 10 words that will be shown to you in the wheel."
+      >
         <WordsList sectors={sectors} setSectors={setSectors} />
       </Modal>
     </>

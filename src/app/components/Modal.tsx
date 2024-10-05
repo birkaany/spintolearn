@@ -6,7 +6,11 @@ export const Modal = ({
   children,
   open,
   setOpen,
+  title,
+  subtitle,
 }: {
+  title?: string;
+  subtitle?: string;
   children: React.ReactNode;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,12 +27,12 @@ export const Modal = ({
       )}
     >
       <div className="bg-white min-w-[400px]  max-w-lg rounded-md p-8 relative">
-        <div className="mb-4 flex flex-col">
-          <h2 className="text-2xl font-semibold">Set up your words</h2>
-          <p className="text-sm text-gray-700">
-            You can set up to 10 words that will be shown to you in the wheel.
-          </p>
-        </div>
+        {title && subtitle && (
+          <div className="mb-4 flex flex-col">
+            {title && <h2 className="text-2xl font-semibold">{title}</h2>}
+            {subtitle && <p className="text-sm text-gray-700">{subtitle}</p>}
+          </div>
+        )}
         <div>
           <button
             onClick={() => setOpen(false)}

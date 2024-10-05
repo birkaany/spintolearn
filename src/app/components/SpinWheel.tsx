@@ -2,13 +2,18 @@
 
 import { COLORS } from "@/constants/colors";
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Modal } from "./Modal";
+import { FaRegPlayCircle } from "react-icons/fa";
 
 export const SpinWheel = ({ sectors }: { sectors: any }) => {
   const wheelRef = useRef<HTMLCanvasElement>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isAccelerating, setIsAccelerating] = useState(false);
-  const [winner, setWinner] = useState(0);
+  const [winner, setWinnerIndex] = useState<number | null>(null);
+  const [winnerModal, setWinnerModal] = useState(false);
+  const [winnerWordData, setWinnerWordData] = useState<any>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const darkenColor = (color: string, amount: number) => {
     let usePound = false;
@@ -104,8 +109,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
           setIsSpinning(false);
           const winnerIndex = getIndex();
 
-          setWinner(winnerIndex);
-          alert(`Kazanan: ${sectors[winnerIndex].label}`);
+          setWinnerIndex(winnerIndex);
 
           return 0;
         }
@@ -126,6 +130,12 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   }, [sectors]);
 
   useEffect(() => {
+    if (winner !== null) {
+      handleWinner();
+    }
+  }, [winner]);
+
+  useEffect(() => {
     const intervalId = setInterval(frame, 1000 / 60);
     return () => clearInterval(intervalId);
   }, [isSpinning, isAccelerating, angVel, ang, angVelMax]);
@@ -139,6 +149,25 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
     setIsSpinning(true);
     setIsAccelerating(true);
     setAngVelMax(rand(0.25, 0.4));
+  };
+
+  const handleWinner = () => {
+    if (winner == undefined) return;
+    fetch(`/api/word/${sectors[winner].label}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+    }).then((res) => {
+      res.json().then((data) => {
+        console.log(data);
+        setWinnerWordData(data);
+      });
+    });
+
+    setTimeout(() => {
+      setWinnerModal(true);
+    }, 1000);
   };
 
   return (
@@ -178,6 +207,34 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
           </div>
         </div>
       )}
+      <Modal open={winnerModal} setOpen={setWinnerModal}>
+        <div className="flex  gap-4 items-start">
+          <div className="flex flex-col ">
+            <h2 className="text-3xl font-medium font-serif font-gray-700 capitalize">
+              {winner && sectors[winner]?.label}
+            </h2>
+            <p className="text-base text-slate-600 font-light italic">
+              {winnerWordData?.data[0]?.fl}
+            </p>
+            <div className="mt-3">
+              <FaRegPlayCircle
+                size={30}
+                className="cursor-pointer"
+                onClick={() => audioRef.current?.play()}
+              />
+              {winnerWordData?.data[0]?.hwi?.prs[0]?.sound?.audio && (
+                <audio
+                  ref={audioRef}
+                  src={`https://media.merriam-webster.com/audio/prons/en/us/mp3/${(winnerWordData?.data[0]?.hwi?.prs[0]?.sound?.audio).charAt(
+                    0
+                  )}/${winnerWordData?.data[0]?.hwi?.prs[0]?.sound?.audio}.mp3
+`}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
