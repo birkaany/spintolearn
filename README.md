@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+<a name="readme-top"></a>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  <h1 align="center">Spin to Learn</h1>
 
-## Learn More
+  <p align="center">
+    Teaching tool for English teachers
+    <br />
+    <br />
+    <a href="https://spintolearn.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/birkaany/spintolearn/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/birkaany/spintolearn/issues">Request Feature</a>
+  </p>
+</div>
 
-To learn more about Next.js, take a look at the following resources:
+<!-- ABOUT THE PROJECT -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## <strong>About The Project</strong>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![https://i.hizliresim.com/3b4yxme.png](https://i.hizliresim.com/3b4yxme.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+<br/>
+
+<br />
+
+<!-- GETTING STARTED -->
+
+## <strong>Design</strong>
+
+I've mixed a few fortune wheel designs while designing UI.
+
+<br/>
+
+## <strong>Features</strong>
+
+- Flexibility: The user can set the word list as they wish between 4 and 10 words.
+- Play pronunciation: When the wheel stops, you can listen to the selected word and hear the pronunciation.
+
+
+<br/>
+
+## <strong>Built With</strong>
+
+This project developed with React, Rest API and TailwindCSS.
+
+<br/>
+<!-- CONTACT -->
+
+## <strong>Contact<strong>
+
+Birkan Yılmaz - [@twitter](https://twitter.com/adimcikmis9a) - birkanyilmaz41@gmail.com
+
+Project Link: [https://github.com/birkaany/spintolearn/](https://github.com/birkaany/spintolearn)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/birkaany/blackjack?style=for-the-badge
+[stars-url]: https://github.com/birkaany/food-order-page/stargazers
+[issues-shield]: https://img.shields.io/github/stars/birkaany/blackjack?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/birkan-yilmaz/
+[product-screenshot]: images/screenshot.png
+[next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[next-url]: https://nextjs.org/
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
+[vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[vue-url]: https://vuejs.org/
+[angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[angular-url]: https://angular.io/
+[svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[svelte-url]: https://svelte.dev/
+[laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[laravel-url]: https://laravel.com
+[bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[bootstrap-url]: https://getbootstrap.com
+[jquery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[jquery-url]: https://jquery.com
