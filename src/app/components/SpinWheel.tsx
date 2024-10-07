@@ -14,7 +14,13 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
   const [winnerModal, setWinnerModal] = useState(false);
   const [winnerWordData, setWinnerWordData] = useState<any>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isDesktop, setIsDesktop] = useState(global.window.innerWidth > 1024);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsDesktop(window.innerWidth > 768);
+    }
+  }, []);
 
   const darkenColor = (color: string, amount: number) => {
     let usePound = false;
@@ -128,7 +134,7 @@ export const SpinWheel = ({ sectors }: { sectors: any }) => {
       ctx.canvas.height = dia;
       sectors.forEach((sector: any, i: number) => drawSector(ctx, sector, i));
     }
-  }, [sectors]);
+  }, [sectors, isDesktop]);
 
   useEffect(() => {
     if (winner !== null) {
