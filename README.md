@@ -64,7 +64,7 @@ This project developed with React, Rest API and TailwindCSS.
 
 ## <strong>Contact<strong>
 
-Birkan Yılmaz - [@twitter](https://twitter.com/adimcikmis9a) - birkanyilmaz41@gmail.com
+Birkan Yılmaz - [@twitter](https://twitter.com/thisisbirkan) - birkanyilmaz41@gmail.com
 
 Project Link: [https://github.com/birkaany/spintolearn/](https://github.com/birkaany/spintolearn)
 
